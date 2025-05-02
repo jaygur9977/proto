@@ -20,6 +20,7 @@ import Home from './component/Home';
 import GroupChat from './component/GroupChat';
 import Makegroup from './component/Makegroup';
 import DocumentManager from './component/DocumentManager';
+import DocumentsSidebar from './component/DocumentsSidebar';
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,13 @@ const router = createBrowserRouter([
     path: "/manage",
     element: <DocumentManager />, 
   },
+
+  {
+    path: "/view",
+    element: <DocumentsSidebar />, 
+  },
+  
+
 
 ]);
 
