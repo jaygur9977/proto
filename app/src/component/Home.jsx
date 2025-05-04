@@ -327,7 +327,6 @@ const HomePage = () => {
                     <i className="fas fa-trash"></i>
                   </button>
                 </div>
-                <p className="text-gray-300 mt-2 mb-4 line-clamp-3">{notice.description}</p>
                 {notice.photoPreview && (
                   <img src={notice.photoPreview} alt="Event" className="rounded-lg max-h-40 object-cover w-full" />
                 )}
