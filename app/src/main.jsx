@@ -21,6 +21,7 @@ import GroupChat from './component/GroupChat';
 import Makegroup from './component/Makegroup';
 import DocumentManager from './component/DocumentManager';
 import DocumentsSidebar from './component/DocumentsSidebar';
+import ViewNoticeboard from './component/ViewNoticeboard'
 
 
 const router = createBrowserRouter([
@@ -47,7 +48,10 @@ const router = createBrowserRouter([
     path: "/view",
     element: <DocumentsSidebar />, 
   },
-  
+  {
+    path: "/viewboard",
+    element: <ViewNoticeboard />, 
+  },
 
 
 ]);

@@ -54,11 +54,11 @@ const HomePage = () => {
       id: Date.now(),
       date: new Date().toLocaleDateString()
     };
-    
+
     const updatedNotices = [noticeWithId, ...notices];
     setNotices(updatedNotices);
     saveNoticesToLocal(updatedNotices);
-    
+
     // Reset form
     setNewNotice({
       title: '',
@@ -92,46 +92,45 @@ const HomePage = () => {
       <section className="py-12 px-4">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-bold text-center mb-12 text-purple-400">Inspirational Quotes on Education</h1>
-          
           <div className="grid md:grid-cols-3 gap-8">
             {/* Gandhi Ji */}
-            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-purple-500/20 transition-shadow">
-              <blockquote className="text-lg italic mb-4">
+            <div className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-purple-500/30 transition-shadow text-sm min-h-[220px]">
+              <blockquote className="italic mb-3">
                 "Live as if you were to die tomorrow. Learn as if you were to live forever."
               </blockquote>
-              <div className="flex items-center">
-                <div className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4">G</div>
+              <div className="flex items-center mt-auto">
+                <div className="bg-purple-500 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold mr-3">G</div>
                 <div>
-                  <p className="font-semibold">Mahatma Gandhi</p>
-                  <p className="text-gray-400 text-sm">Father of the Nation</p>
+                  <p className="font-medium text-base">Mahatma Gandhi</p>
+                  <p className="text-gray-400 text-xs">Father of the Nation</p>
                 </div>
               </div>
             </div>
             
             {/* Nehru Ji */}
-            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-blue-500/20 transition-shadow">
-              <blockquote className="text-lg italic mb-4">
+            <div className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-blue-500/30 transition-shadow text-sm min-h-[220px]">
+              <blockquote className="italic mb-3">
                 "The object of education is to prepare the young to educate themselves throughout their lives."
               </blockquote>
-              <div className="flex items-center">
-                <div className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4">N</div>
+              <div className="flex items-center mt-auto">
+                <div className="bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold mr-3">N</div>
                 <div>
-                  <p className="font-semibold">Jawaharlal Nehru</p>
-                  <p className="text-gray-400 text-sm">First PM of India</p>
+                  <p className="font-medium text-base">Jawaharlal Nehru</p>
+                  <p className="text-gray-400 text-xs">First PM of India</p>
                 </div>
               </div>
             </div>
             
             {/* Abdul Kalam */}
-            <div className="bg-gray-800 p-6 rounded-xl shadow-lg hover:shadow-green-500/20 transition-shadow">
-              <blockquote className="text-lg italic mb-4">
+            <div className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-green-500/30 transition-shadow text-sm min-h-[220px]">
+              <blockquote className="italic mb-3">
                 "Education is the most powerful weapon which you can use to change the world."
               </blockquote>
-              <div className="flex items-center">
-                <div className="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold mr-4">A</div>
+              <div className="flex items-center mt-auto">
+                <div className="bg-green-500 w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold mr-3">A</div>
                 <div>
-                  <p className="font-semibold">APJ Abdul Kalam</p>
-                  <p className="text-gray-400 text-sm">Missile Man of India</p>
+                  <p className="font-medium text-base">APJ Abdul Kalam</p>
+                  <p className="text-gray-400 text-xs">Missile Man of India</p>
                 </div>
               </div>
             </div>
@@ -139,44 +138,58 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Communication Features */}
+      {/* Communication Tools */}
       <section className="py-12 px-4 bg-gray-800">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">Communication Tools</h2>
-          
+          <h2 className="text-3xl font-bold text-center mb-12 text-purple-400">Communication Tools we offers</h2>
           <div className="grid md:grid-cols-3 gap-8">
             {/* Voice Call */}
-            <div className="bg-gray-700 p-6 rounded-xl text-center hover:transform hover:scale-105 transition-transform">
-              <div className="bg-purple-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-phone-alt text-2xl"></i>
+            <div className="bg-gray-700 p-5 rounded-lg text-center hover:scale-105 transition-transform duration-300 min-h-[240px] shadow-md">
+              <div className="bg-purple-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i className="fas fa-phone-alt text-lg"></i>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Voice Call</h3>
-              <p className="text-gray-300 mb-4">Connect with peers through high-quality voice calls</p>
-              <button className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition-colors">
+              <h3 className="text-lg font-semibold mb-1">Voice Call</h3>
+              <p className="text-gray-300 text-sm mb-3">High-quality voice calls for instant connection</p>
+              <button className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-1 rounded-full text-sm">
                 Start Call
               </button>
             </div>
             
             {/* Video Call */}
-            <div className="bg-gray-700 p-6 rounded-xl text-center hover:transform hover:scale-105 transition-transform">
-              <div className="bg-blue-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-video text-2xl"></i>
+            <div className="bg-gray-700 p-5 rounded-lg text-center hover:scale-105 transition-transform duration-300 min-h-[240px] shadow-md">
+              <div className="bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i className="fas fa-video text-lg"></i>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Video Call</h3>
-              <p className="text-gray-300 mb-4">Face-to-face virtual meetings with screen sharing</p>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition-colors">
+              <h3 className="text-lg font-semibold mb-1">Video Call</h3>
+              <p className="text-gray-300 text-sm mb-3">Face-to-face virtual meetings with screen sharing</p>
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1 rounded-full text-sm">
+                Start Video
+              </button>
+            </div>
+
+
+
+
+            {/* Video Call */}
+            <div className="bg-gray-700 p-3 rounded-lg text-center hover:scale-105 transition-transform duration-300 min-h-[200px] shadow-md">
+              <div className="bg-red-400 w-14 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i className="fas fa-video text-lg"></i>
+              </div>
+              <h3 className="text-lg font-semibold mb-1">Noticeboard</h3>
+              <p className="text-gray-300 text-sm mb-3">Notice board for sharing valuable events and opportunities</p>
+              <button className="bg-red-400 hover:bg-gray-900 text-white px-4 py-1 rounded-full text-sm">
                 Start Video
               </button>
             </div>
             
             {/* Group Chat */}
-            <div className="bg-gray-700 p-6 rounded-xl text-center hover:transform hover:scale-105 transition-transform">
-              <div className="bg-green-600 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-comments text-2xl"></i>
+            <div className="bg-gray-700 p-5 rounded-lg text-center hover:scale-105 transition-transform duration-300 min-h-[240px] shadow-md">
+              <div className="bg-green-600 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+                <i className="fas fa-comments text-lg"></i>
               </div>
-              <h3 className="text-xl font-semibold mb-2">Group Chat</h3>
-              <p className="text-gray-300 mb-4">Collaborate with your team in real-time chat rooms</p>
-              <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-full transition-colors">
+              <h3 className="text-lg font-semibold mb-1">Group Chat</h3>
+              <p className="text-gray-300 text-sm mb-3">Collaborate with your team in real-time chat rooms</p>
+              <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-1 rounded-full text-sm">
                 Open Chat
               </button>
             </div>
@@ -214,7 +227,7 @@ const HomePage = () => {
                       required
                     />
                   </div>
-                  
+
                   <div>
                     <label className="block text-gray-300 mb-2">Event Type</label>
                     <select
@@ -229,7 +242,7 @@ const HomePage = () => {
                       <option value="other">Other</option>
                     </select>
                   </div>
-                  
+
                   <div className="md:col-span-2">
                     <label className="block text-gray-300 mb-2">Description</label>
                     <textarea
@@ -241,7 +254,7 @@ const HomePage = () => {
                       required
                     ></textarea>
                   </div>
-                  
+
                   <div>
                     <label className="block text-gray-300 mb-2">Priority</label>
                     <select
@@ -256,7 +269,7 @@ const HomePage = () => {
                       <option value="urgent">Urgent</option>
                     </select>
                   </div>
-                  
+
                   <div>
                     <label className="block text-gray-300 mb-2">Event Photo</label>
                     <input
@@ -272,7 +285,7 @@ const HomePage = () => {
                     )}
                   </div>
                 </div>
-                
+
                 <div className="flex justify-end mt-6 space-x-4">
                   <button
                     type="button"
@@ -285,7 +298,7 @@ const HomePage = () => {
                     type="submit"
                     className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition-colors"
                   >
-                    Post Notice
+                    Save Notice
                   </button>
                 </div>
               </form>
@@ -293,92 +306,78 @@ const HomePage = () => {
           )}
 
           {/* Notices List */}
-          <div className="space-y-6">
-            {notices.length === 0 ? (
-              <div className="text-center py-12 bg-gray-800 rounded-xl">
-                <i className="fas fa-bell-slash text-4xl text-gray-500 mb-4"></i>
-                <p className="text-gray-400">No notices yet. Add one to get started!</p>
-              </div>
-            ) : (
-              notices.map(notice => (
-                <div key={notice.id} className={`bg-gray-800 p-6 rounded-xl shadow-lg border-l-4 ${getPriorityColor(notice.priority)}`}>
-                  <div className="flex justify-between items-start mb-2">
-                    <div>
-                      <h3 className="text-xl font-semibold">{notice.title}</h3>
-                      <div className="flex items-center space-x-4 mt-1">
-                        <span className="text-sm text-gray-400">{notice.date}</span>
-                        <span className="text-sm px-3 py-1 rounded-full bg-gray-700 text-purple-300">
-                          {notice.eventType.charAt(0).toUpperCase() + notice.eventType.slice(1)}
-                        </span>
-                        <span className={`text-sm px-3 py-1 rounded-full ${getPriorityColor(notice.priority)}`}>
-                          {notice.priority.charAt(0).toUpperCase() + notice.priority.slice(1)}
-                        </span>
-                      </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {notices.map(notice => (
+              <div key={notice.id} className={`bg-gray-800 p-4 rounded-lg shadow-md border-l-4 ${getPriorityColor(notice.priority)} text-sm`}>
+                <div className="flex justify-between items-start mb-2">
+                  <div>
+                    <h3 className="text-lg font-semibold line-clamp-1">{notice.title}</h3>
+                    <div className="flex items-center space-x-2 mt-1 text-xs text-gray-400">
+                      <span>{notice.date}</span>
+                      <span className="bg-gray-700 px-2 py-0.5 rounded-full text-purple-300">{notice.eventType}</span>
+                      <span className={`px-2 py-0.5 rounded-full ${getPriorityColor(notice.priority)}`}>
+                        {notice.priority}
+                      </span>
                     </div>
-                    <button 
-                      onClick={() => deleteNotice(notice.id)}
-                      className="text-gray-400 hover:text-red-400 transition-colors"
-                    >
-                      <i className="fas fa-trash"></i>
-                    </button>
                   </div>
-                  
-                  <p className="text-gray-300 mt-4 mb-6">{notice.description}</p>
-                  
-                  {notice.photoPreview && (
-                    <div className="mt-4">
-                      <img src={notice.photoPreview} alt="Event" className="max-w-full h-auto rounded-lg max-h-60" />
-                    </div>
-                  )}
+                  <button
+                    onClick={() => deleteNotice(notice.id)}
+                    className="text-gray-400 hover:text-red-400"
+                  >
+                    <i className="fas fa-trash"></i>
+                  </button>
                 </div>
-              ))
-            )}
+                <p className="text-gray-300 mt-2 mb-4 line-clamp-3">{notice.description}</p>
+                {notice.photoPreview && (
+                  <img src={notice.photoPreview} alt="Event" className="rounded-lg max-h-40 object-cover w-full" />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 py-8 px-4 mt-auto">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-400">Education Portal</h3>
-              <p className="text-gray-400">Empowering students with knowledge and collaboration tools for a brighter future.</p>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-400">Quick Links</h3>
-              <ul className="space-y-2">
-                <li><a href="#" className="text-gray-400 hover:text-purple-300 transition-colors">About Us</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-purple-300 transition-colors">Contact</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-purple-300 transition-colors">Privacy Policy</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 className="text-xl font-semibold mb-4 text-purple-400">Connect With Us</h3>
-              <div className="flex space-x-4">
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors text-xl">
-                  <i className="fab fa-facebook"></i>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-blue-400 transition-colors text-xl">
-                  <i className="fab fa-twitter"></i>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-pink-500 transition-colors text-xl">
-                  <i className="fab fa-instagram"></i>
-                </a>
-                <a href="#" className="text-gray-400 hover:text-red-500 transition-colors text-xl">
-                  <i className="fab fa-youtube"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500">
-            <p>&copy; {new Date().getFullYear()} Education Portal. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* Footer Section */}
+<footer className="bg-gray-700 text-gray-200 mt-9 py-6">
+  <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-10">
+    
+    {/* Branding */}
+    <div>
+      <h3 className="text-xl font-bold text-purple-300 mb-3">EduConnect</h3>
+      <p className="text-sm text-gray-300">
+        Empowering students and institutions through seamless communication and updates.
+      </p>
+    </div>
+
+    {/* Features */}
+    <div>
+      <h4 className="text-lg font-semibold text-purple-200 mb-3">Features We Offer</h4>
+      <ul className="space-y-2 text-sm">
+        <li>📌 Notice Board</li>
+        <li>📞 Voice Call</li>
+        <li>🎥 Video Call</li>
+        <li>💬 Group Chat</li>
+        <li>👥 Group Call</li>
+      </ul>
+    </div>
+
+    {/* Links */}
+    <div>
+      <h4 className="text-lg font-semibold text-purple-200 mb-3">Quick Links</h4>
+      <ul className="space-y-2 text-sm">
+        <li><a href="#" className="hover:text-purple-300 transition-colors">Privacy Policy</a></li>
+        <li><a href="#" className="hover:text-purple-300 transition-colors">Terms of Use</a></li>
+        <li><a href="#" className="hover:text-purple-300 transition-colors">Contact Us</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div className="text-center text-sm text-gray-400 mt-8">
+    © {new Date().getFullYear()} EduConnect. All rights reserved.
+  </div>
+</footer>
+
     </div>
   );
 };
