@@ -28,15 +28,15 @@ const Navbar = () => {
   };
 
   const handleBoard = () => {
-    window.location.href = '/';
+    window.location.href = '/viewboard';
   };
 
   const handleVideoCall = () => {
-   
+    window.location.href = '/video';
   };
 
   const handleVoiceCall = () => {
-    
+    window.location.href = '/voice';
   };
 
   return (

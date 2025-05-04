@@ -172,13 +172,13 @@ const HomePage = () => {
 
             {/* Video Call */}
             <div className="bg-gray-700 p-3 rounded-lg text-center hover:scale-105 transition-transform duration-300 min-h-[200px] shadow-md">
-              <div className="bg-red-400 w-14 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
+              <div className="bg-red-500 w-14 h-12 rounded-full flex items-center justify-center mx-auto mb-2">
                 <i className="fas fa-video text-lg"></i>
               </div>
               <h3 className="text-lg font-semibold mb-1">Noticeboard</h3>
               <p className="text-gray-300 text-sm mb-3">Notice board for sharing valuable events and opportunities</p>
-              <button className="bg-red-400 hover:bg-gray-900 text-white px-4 py-1 rounded-full text-sm">
-                Start Video
+              <button className="bg-red-500 hover:bg-red-400 text-white px-4 py-1 rounded-full text-sm">
+                check Imp Notice
               </button>
             </div>
             
@@ -306,9 +306,9 @@ const HomePage = () => {
           )}
 
           {/* Notices List */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 text-gray-900">
             {notices.map(notice => (
-              <div key={notice.id} className={`bg-gray-800 p-4 rounded-lg shadow-md border-l-4 ${getPriorityColor(notice.priority)} text-sm`}>
+              <div key={notice.id} className={`bg-gray-800 p-4 rounded-lg shadow-md border-l-4 ${getPriorityColor(notice.priority)}`}>
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <h3 className="text-lg font-semibold line-clamp-1">{notice.title}</h3>
