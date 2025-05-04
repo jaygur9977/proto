@@ -27,10 +27,7 @@ const HomePage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewNotice({
-      ...newNotice,
-      [name]: value
-    });
+    setNewNotice({ ...newNotice, [name]: value });
   };
 
   const handleFileChange = (e) => {
@@ -75,6 +72,13 @@ const HomePage = () => {
     saveNoticesToLocal(updatedNotices);
   };
 
+  const deleteAllNotices = () => {
+    if (window.confirm("Are you sure you want to delete all notices?")) {
+      localStorage.removeItem('educationNotices');
+      setNotices([]);
+    }
+  };
+
   const getPriorityColor = (priority) => {
     switch (priority) {
       case 'urgent': return 'bg-red-600';
@@ -86,16 +90,28 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gray-900 text-gray-100 p-6">
-      <div className="flex justify-between items-center mb-8">
+      {/* Header */}
+      <div className="flex flex-wrap justify-between items-center mb-8 gap-4">
         <h2 className="text-3xl font-bold text-purple-400">Notice Board</h2>
-        <button
-          onClick={() => setShowNoticeForm(!showNoticeForm)}
-          className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition-colors flex items-center"
-        >
-          <i className="fas fa-plus mr-2"></i> Add Notice
-        </button>
+
+        <div className="flex gap-4">
+          <button
+            onClick={() => setShowNoticeForm(!showNoticeForm)}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-full transition-colors flex items-center"
+          >
+            <i className="fas fa-plus mr-2"></i> Add Notice
+          </button>
+
+          <button
+            onClick={deleteAllNotices}
+            className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full transition-colors flex items-center"
+          >
+            <i className="fas fa-trash-alt mr-2"></i> Delete All
+          </button>
+        </div>
       </div>
 
+      {/* Notice Form */}
       {showNoticeForm && (
         <div className="bg-gray-800 p-6 rounded-xl shadow-lg mb-8">
           <h3 className="text-xl font-semibold mb-4 text-purple-300">Create New Notice</h3>
@@ -188,6 +204,7 @@ const HomePage = () => {
         </div>
       )}
 
+      {/* Notice Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {notices.map(notice => (
           <div
@@ -224,14 +241,10 @@ const HomePage = () => {
         ))}
       </div>
 
-      {/* Modal for full notice view (no internal scrollbar) */}
+      {/* Modal for Full Notice */}
       {selectedNotice && (
         <div className="fixed inset-0 bg-black bg-opacity-70 z-50 flex justify-center items-start overflow-y-auto py-10">
           <div className="bg-gray-900 w-full max-w-xl rounded-lg p-6 relative shadow-lg mx-4">
-          <button>
-            
-          </button>
-
             <button
               onClick={() => setSelectedNotice(null)}
               className="absolute top-3 right-3 text-white hover:text-red-400 text-xl"
@@ -243,13 +256,13 @@ const HomePage = () => {
             <h2 className="text-2xl font-bold text-purple-400 mb-2">{selectedNotice.title}</h2>
 
             <div className='pt-2.5 pb-9'>
-            {selectedNotice.photoPreview && (
-              <img 
-                src={selectedNotice.photoPreview}
-                alt="Event"
-                className="rounded-lg object-cover w-full max-h-[400px]"
-              />
-            )}
+              {selectedNotice.photoPreview && (
+                <img 
+                  src={selectedNotice.photoPreview}
+                  alt="Event"
+                  className="rounded-lg object-cover w-full max-h-[400px]"
+                />
+              )}
             </div>
             <div className="text-sm text-gray-400 mb-2 flex space-x-2">
               <span>{selectedNotice.date}</span>
@@ -259,7 +272,7 @@ const HomePage = () => {
               </span>
             </div>
 
-            <p className="text-gray-300 mb-4 pt-30 whitespace-pre-wrap">{selectedNotice.description}</p>
+            <p className="text-gray-300 mb-4 pt-2 whitespace-pre-wrap">{selectedNotice.description}</p>
           </div>
         </div>
       )}
