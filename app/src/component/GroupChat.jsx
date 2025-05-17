@@ -422,4 +422,4 @@ const GroupChat = ({ group, onClose }) => {
   );
 };
 
-export default GroupChat;
+export default GroupChat; 

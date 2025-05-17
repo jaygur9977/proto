@@ -1,57 +1,57 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const AttachmentModal = ({ isOpen, onClose, onSendAttachment }) => {
-  const [attachmentType, setAttachmentType] = useState('notes');
+const AttachmentModal = ({ isOpen, onClose }) => {
   const [file, setFile] = useState(null);
-  const [senderName, setSenderName] = useState('');
-  const [details, setDetails] = useState({
-    year: '1',
-    semester: '1',
-    subject: '',
-    chapter: '1'
-  });
-
-  const years = ['1', '2', '3', '4'];
-  const semesters = ['1', '2', '3', '4', '5', '6', '7', '8'];
-  const chapters = ['1', '2', '3', '4', '5', '6', '7', '8'];
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
+    const selectedFile = e.target.files[0];
+    if (selectedFile && (selectedFile.type.startsWith('image/') || selectedFile.type === 'application/pdf')) {
+      setFile(selectedFile);
+    } else {
+      toast.error('Please select an image or PDF file');
+      e.target.value = '';
+    }
   };
 
-  const handleSubmit = (e) => {
+  const showCategoryToast = (filename, fileType) => {
+    const nameWithoutExt = filename.split('.').slice(0, -1).join('.');
+    const lastChar = nameWithoutExt.slice(-1).toLowerCase();
+    
+    let category = 'File';
+    if (lastChar === 'p') category = 'Presentation';
+    else if (lastChar === 't') category = 'Text';
+    else if (lastChar === 'd' && fileType.startsWith('image/')) category = 'Diagram';
+    
+    toast.success(`This ${fileType.startsWith('image/') ? 'image' : 'PDF'} would be saved as ${category}`, {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+    });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!file || !senderName.trim()) return;
+    if (!file) {
+      toast.error('Please select a file first');
+      return;
+    }
     
-    const reader = new FileReader();
-    reader.onload = (event) => {
-      const attachment = {
-        id: Date.now(),
-        type: attachmentType,
-        name: file.name,
-        file: event.target.result, // Store as base64 string
-        sender: senderName,
-        timestamp: new Date().toISOString(),
-        details: {
-          ...details,
-          subject: details.subject.trim()
-        }
-      };
-      
-      onSendAttachment(attachment);
-      // Reset form
+    setIsLoading(true);
+    
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      showCategoryToast(file.name, file.type);
       setFile(null);
-      setSenderName('');
-      setDetails({
-        year: '1',
-        semester: '1',
-        subject: '',
-        chapter: '1'
-      });
       onClose();
-    };
-    
-    reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error('File processing failed');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -60,106 +60,39 @@ const AttachmentModal = ({ isOpen, onClose, onSendAttachment }) => {
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-gray-800 rounded-lg p-6 w-full max-w-md">
         <div className="flex justify-between items-center mb-4">
-          <h3 className="text-xl font-bold text-white">Send Attachment</h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-white">
+          <h2 className="text-2xl font-bold text-white">Upload File</h2>
+          <button 
+            onClick={onClose} 
+            className="text-gray-400 hover:text-white text-2xl"
+          >
             ✕
           </button>
         </div>
-        
+
         <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2">Your Name</label>
-            <input
-              type="text"
-              value={senderName}
-              onChange={(e) => setSenderName(e.target.value)}
-              className="w-full bg-gray-700 text-white rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-              placeholder="Enter your name"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-300 mb-2">Attachment Type</label>
-            <select 
-              value={attachmentType}
-              onChange={(e) => setAttachmentType(e.target.value)}
-              className="w-full bg-gray-700 text-white rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="notes">Class Notes</option>
-              <option value="pyq">Previous Year Questions</option>
-              <option value="photo">Photo</option>
-              <option value="pdf">PDF Document</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-
-          {(attachmentType === 'notes' || attachmentType === 'pyq') && (
-            <div className="grid grid-cols-2 gap-3 mb-4">
-              <div>
-                <label className="block text-gray-300 mb-1 text-sm">Year</label>
-                <select
-                  value={details.year}
-                  onChange={(e) => setDetails({...details, year: e.target.value})}
-                  className="w-full bg-gray-700 text-white rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {years.map(year => (
-                    <option key={year} value={year}>Year {year}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-gray-300 mb-1 text-sm">Semester</label>
-                <select
-                  value={details.semester}
-                  onChange={(e) => setDetails({...details, semester: e.target.value})}
-                  className="w-full bg-gray-700 text-white rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {semesters.map(sem => (
-                    <option key={sem} value={sem}>Sem {sem}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="col-span-2">
-                <label className="block text-gray-300 mb-1 text-sm">Subject</label>
-                <input 
-                  type="text" 
-                  value={details.subject}
-                  onChange={(e) => setDetails({...details, subject: e.target.value})}
-                  className="w-full bg-gray-700 text-white rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  required
-                  placeholder="Enter subject name"
-                />
-              </div>
-              <div className="col-span-2">
-                <label className="block text-gray-300 mb-1 text-sm">Chapter</label>
-                <select
-                  value={details.chapter}
-                  onChange={(e) => setDetails({...details, chapter: e.target.value})}
-                  className="w-full bg-gray-700 text-white rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  {chapters.map(ch => (
-                    <option key={ch} value={ch}>Chapter {ch}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          )}
-
           <div className="mb-4">
             <label className="block text-gray-300 mb-2">Select File</label>
             <div className="flex items-center">
-              <label className="flex flex-col items-center px-4 py-2 bg-gray-700 text-white rounded-lg tracking-wide border border-gray-600 cursor-pointer hover:bg-gray-600">
-                <span className="text-sm">{file ? file.name : 'Choose a file'}</span>
+              <label className="flex flex-col items-center px-4 py-2 bg-gray-700 text-white rounded-lg tracking-wide border border-gray-600 cursor-pointer hover:bg-gray-600 w-full">
+                <span className="text-sm truncate max-w-xs">
+                  {file ? file.name : 'Choose a file...'}
+                </span>
                 <input 
                   type="file" 
                   onChange={handleFileChange}
                   className="hidden"
-                  accept={attachmentType === 'photo' ? 'image/*' : attachmentType === 'pdf' ? '.pdf' : '*'}
+                  accept="image/*,.pdf"
                   required
                 />
               </label>
             </div>
+            <p className="text-gray-400 text-xs mt-2">
+              Supported: Images and PDFs
+              <br />Naming convention:
+              <br />• 'p' suffix → Presentation
+              <br />• 't' suffix → Text
+              <br />• 'd' suffix → Diagram (images only)
+            </p>
           </div>
 
           <div className="flex justify-end space-x-2">
@@ -172,14 +105,14 @@ const AttachmentModal = ({ isOpen, onClose, onSendAttachment }) => {
             </button>
             <button
               type="submit"
-              disabled={!file || !senderName.trim()}
-              className={`px-4 py-2 rounded transition-colors ${
-                !file || !senderName.trim() 
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed' 
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
+              disabled={!file || isLoading}
+              className={`px-4 py-2 rounded text-white transition-colors ${
+                !file || isLoading
+                  ? 'bg-gray-600 cursor-not-allowed' 
+                  : 'bg-blue-600 hover:bg-blue-700'
               }`}
             >
-              Save
+              {isLoading ? 'Processing...' : 'Upload'}
             </button>
           </div>
         </form>

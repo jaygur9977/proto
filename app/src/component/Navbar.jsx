@@ -31,13 +31,11 @@ const Navbar = () => {
     window.location.href = '/viewboard';
   };
 
-  const handleVideoCall = () => {
-    window.location.href = '/video';
+  const handleVideoGame = () => {
+    window.location.href = '/game';
   };
 
-  const handleVoiceCall = () => {
-    window.location.href = '/voice';
-  };
+
 
   return (
     <nav className="bg-gray-800 p-4 shadow-lg">
@@ -58,12 +56,10 @@ const Navbar = () => {
           <button onClick={handleBoard} className="hover:text-blue-400 transition-colors">
             Board
           </button>
-          <button onClick={handleVideoCall} className="hover:text-blue-400 transition-colors">
-            Video
+          <button onClick={handleVideoGame} className="hover:text-blue-400 transition-colors">
+            Game
           </button>
-          <button onClick={handleVoiceCall} className="hover:text-blue-400 transition-colors">
-            Voice
-          </button>
+         
         </div>
 
         {/* Mobile Menu Icons */}
@@ -74,11 +70,8 @@ const Navbar = () => {
           <button onClick={handleBoard} title="Board">
             <FaChalkboard />
           </button>
-          <button onClick={handleVideoCall} title="Video Call">
+          <button onClick={handleVideoGame} title="Video Call">
             <FaVideo />
-          </button>
-          <button onClick={handleVoiceCall} title="Voice Call">
-            <FaPhone />
           </button>
         </div>
 

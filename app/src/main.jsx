@@ -24,6 +24,7 @@ import DocumentsSidebar from './component/DocumentsSidebar';
 import ViewNoticeboard from './component/ViewNoticeboard'
 import Voice from './component/Voice';
 import Video from './component/Video';
+import Game from './component/Game';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/group",
     element: <Makegroup />, 
+  },
+  {
+    path: "/game",
+    element: <Game />, 
   },
   
   {
